@@ -1,0 +1,26 @@
+[
+    {
+        "id": "001",
+        "nombres": "sebastian",
+        "apellidos": "diaz",
+        "telefono": "1234567",
+        "direccion": "calle 38a_30",
+        "tipo": "administrador"
+    },
+    {
+        "id": "002",
+        "nombres": "diego",
+        "apellidos": "dis",
+        "telefono": "123",
+        "direccion": "asd",
+        "tipo": "residente"
+    },
+    {
+        "id": "123",
+        "nombres": "pechi",
+        "apellidos": "florez",
+        "telefono": "234345",
+        "direccion": "calle 23 #23",
+        "tipo": "residente"
+    }
+]

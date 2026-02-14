@@ -1,0 +1,20 @@
+[
+    {
+        "id": "mart001",
+        "nombre": "martillo",
+        "categoria": "herrmamienta",
+        "cantidad": 34,
+        "estado": "activo",
+        "valor": 30000.0,
+        "veces_prestada": 1
+    },
+    {
+        "id": "destor001",
+        "nombre": "destornillador",
+        "categoria": "activa",
+        "cantidad": 4,
+        "estado": "activa",
+        "valor": 10000.0,
+        "veces_prestada": 0
+    }
+]
