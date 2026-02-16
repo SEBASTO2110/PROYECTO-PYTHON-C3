@@ -1,5 +1,6 @@
 import json
 import os
+from datetime import datetime
 from herramientas import buscar, cargar as cargar_herr, actualizar_todas
 from logs import registrar_log
 
@@ -18,7 +19,7 @@ def guardar(datos):
         json.dump(datos, f, indent=4)
 
 
-def solicitar(id_p, id_usuario, id_herramienta, cantidad):
+def solicitar(id_p, id_usuario, id_herramienta, cantidad, fecha_devolucion, observaciones=""):
     prestamos = cargar()
     herramienta = buscar(id_herramienta)
 
@@ -34,12 +35,16 @@ def solicitar(id_p, id_usuario, id_herramienta, cantidad):
         "usuario": id_usuario,
         "herramienta": id_herramienta,
         "cantidad": cantidad,
-        "estado": "pendiente"
+        "fecha_inicio": datetime.now().strftime("%Y-%m-%d"),
+        "fecha_devolucion": fecha_devolucion,
+        "estado": "pendiente",
+        "observaciones": observaciones
     }
 
     prestamos.append(nuevo)
     guardar(prestamos)
-    return True, "Solicitud creada (pendiente aprobación)"
+    registrar_log(f"Solicitud creada: {id_p}")
+    return True, "Solicitud creada"
 
 
 def aprobar(id_p):
@@ -59,6 +64,7 @@ def aprobar(id_p):
 
                         actualizar_todas(herramientas)
                         guardar(prestamos)
+                        registrar_log(f"Préstamo aprobado: {id_p}")
                         return True
 
     return False
@@ -78,6 +84,7 @@ def devolver(id_p):
 
                     actualizar_todas(herramientas)
                     guardar(prestamos)
+                    registrar_log(f"Préstamo devuelto: {id_p}")
                     return True
 
     return False

@@ -1,5 +1,6 @@
 import json
 import os
+from logs import registrar_log
 
 ARCHIVO = "herramientas.json"
 
@@ -35,6 +36,7 @@ def crear(id_h, nombre, categoria, cantidad, estado, valor):
 
     herramientas.append(nueva)
     guardar(herramientas)
+    registrar_log(f"Herramienta creada: {id_h}")
     return True
 
 
@@ -48,6 +50,31 @@ def buscar(id_h):
         if h["id"] == id_h:
             return h
     return None
+
+
+def actualizar_herramienta(id_h, nuevos_datos):
+    herramientas = cargar()
+
+    for h in herramientas:
+        if h["id"] == id_h:
+            h.update(nuevos_datos)
+            guardar(herramientas)
+            registrar_log(f"Herramienta actualizada: {id_h}")
+            return True
+
+    return False
+
+
+def eliminar_herramienta(id_h):
+    herramientas = cargar()
+    herramientas_filtradas = [h for h in herramientas if h["id"] != id_h]
+
+    if len(herramientas) == len(herramientas_filtradas):
+        return False
+
+    guardar(herramientas_filtradas)
+    registrar_log(f"Herramienta eliminada: {id_h}")
+    return True
 
 
 def actualizar_todas(herramientas):
